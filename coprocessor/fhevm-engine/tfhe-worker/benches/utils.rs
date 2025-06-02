@@ -354,6 +354,12 @@ pub mod shortint_utils {
 
     impl From<PBSParameters> for CryptoParametersRecord<u64> {
         fn from(params: PBSParameters) -> Self {
+            AtomicPatternParameters::from(params).into()
+        }
+    }
+
+    impl From<AtomicPatternParameters> for CryptoParametersRecord<u64> {
+        fn from(params: AtomicPatternParameters) -> Self {
             CryptoParametersRecord {
                 lwe_dimension: Some(params.lwe_dimension()),
                 glwe_dimension: Some(params.glwe_dimension()),
@@ -376,7 +382,7 @@ pub mod shortint_utils {
             }
         }
     }
-
+    
     impl From<ShortintKeySwitchingParameters> for CryptoParametersRecord<u64> {
         fn from(params: ShortintKeySwitchingParameters) -> Self {
             CryptoParametersRecord {
