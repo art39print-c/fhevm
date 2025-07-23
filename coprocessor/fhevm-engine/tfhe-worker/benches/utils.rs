@@ -382,7 +382,7 @@ pub mod shortint_utils {
             }
         }
     }
-    
+
     impl From<ShortintKeySwitchingParameters> for CryptoParametersRecord<u64> {
         fn from(params: ShortintKeySwitchingParameters) -> Self {
             CryptoParametersRecord {

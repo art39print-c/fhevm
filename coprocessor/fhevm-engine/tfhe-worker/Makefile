@@ -40,6 +40,11 @@ clean_run:
 # Benchmarks
 #
 
+.PHONY: profile_erc20_gpu # Run ECR20 transfer benchmarks on GPU
+profile_erc20_gpu:
+	RUSTFLAGS="-C target-cpu=native" $(DB_URL) cargo +nightly bench --no-run --bench erc20 --features=gpu-profile,bench,$(OPTIMIZATION_TARGET) --
+	RUSTFLAGS="-C target-cpu=native" $(DB_URL) FHEVM_TEST_NUM_SAMPLES=200 nsys profile cargo +nightly bench --bench erc20 --features=gpu-profile,bench,$(OPTIMIZATION_TARGET) --
+
 .PHONY: benchmark_erc20_gpu # Run ECR20 transfer benchmarks on GPU
 benchmark_erc20_gpu:
 	RUSTFLAGS="-C target-cpu=native" $(DB_URL) cargo +nightly bench --bench erc20 --features=gpu,bench,$(OPTIMIZATION_TARGET) --
