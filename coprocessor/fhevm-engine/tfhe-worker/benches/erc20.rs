@@ -57,6 +57,12 @@ async fn run_profile_erc20() {
         .unwrap();
     let keys = &keys[0];
 
+    let tfhers_params = keys.cks.computation_parameters();
+    println!("***********************************");
+    println!("CRYPTO PARAMS FOR ERC20 PROFILING");
+    println!("{}", serde_json::to_string(&tfhers_params).unwrap());
+    println!("***********************************");
+
     prepare_erc20_no_cmux(&app, keys, num_samples).await;
 
     let db_url = app.db_url().to_string();
