@@ -1,9 +1,9 @@
 use alloy::{hex, primitives::U256};
 use anyhow::anyhow;
 use kms_grpc::kms::v1::{
-    KeyGenPreprocRequest, KeyGenPreprocResult, KeyGenRequest, KeyGenResult,
-    PublicDecryptionRequest, PublicDecryptionResponse, RequestId, UserDecryptionRequest,
-    UserDecryptionResponse,
+    CrsGenRequest, CrsGenResult, KeyGenPreprocRequest, KeyGenPreprocResult, KeyGenRequest,
+    KeyGenResult, PublicDecryptionRequest, PublicDecryptionResponse, RequestId,
+    UserDecryptionRequest, UserDecryptionResponse,
 };
 use tonic::Response;
 
@@ -14,6 +14,7 @@ pub enum KmsGrpcRequest {
     UserDecryption(UserDecryptionRequest),
     PrepKeygen(KeyGenPreprocRequest),
     Keygen(KeyGenRequest),
+    Crsgen(CrsGenRequest),
 }
 
 impl From<PublicDecryptionRequest> for KmsGrpcRequest {
@@ -41,6 +42,7 @@ pub enum KmsGrpcResponse {
     },
     PrepKeygen(KeyGenPreprocResult),
     Keygen(KeyGenResult),
+    Crsgen(CrsGenResult),
 }
 
 impl TryFrom<(RequestId, Response<PublicDecryptionResponse>)> for KmsGrpcResponse {
